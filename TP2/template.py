@@ -47,7 +47,40 @@ def create_custom_theme():
         Specifies the x-axis ticks are tilted 45
         degrees to the right.
     '''
-    # TODO : Generate template described above
+    custom = go.layout.Template(
+        layout=go.Layout(
+            font=dict(
+                family=THEME['font_family'],
+                color=THEME['dark_color'],
+            ),
+            paper_bgcolor=THEME['background_color'],
+            plot_bgcolor=THEME['background_color'],
+
+            hoverlabel=dict(
+                bgcolor=THEME['label_background_color'],
+                font=dict(
+                    size=THEME['label_font_size'],
+                    color=THEME['dark_color'],
+                    family=THEME['font_family'],
+                ),
+            ),
+            hovermode='closest',
+
+            colorway=[THEME['line_chart_color']],
+
+            # palette de couleur utilisé par le heatmap.
+            colorscale=dict(
+                sequential=THEME['colorscale']
+            ),
+            #angle des labels de l'axe X.
+            xaxis=dict(
+                tickangle=-45
+            )
+        )
+    )
+    pio.templates["custom_theme"] = custom
+
+    
 
 
 def set_default_theme():
@@ -55,4 +88,7 @@ def set_default_theme():
         Sets the default theme to be a combination of the
         'plotly_white' theme and our custom theme.
     '''
-    # TODO : Set default theme
+    if "custom_theme" not in pio.templates:
+        create_custom_theme()
+    pio.templates.default = "plotly_white+custom_theme"
+
