@@ -3,7 +3,6 @@
 '''
 import plotly.express as px
 import hover_template
-
 from template import THEME
 
 
@@ -15,10 +14,16 @@ def get_empty_figure():
         in the heatmap for more information.
 
     '''
-
-    # TODO : Construct the empty figure to display. Make sure to 
-    # set dragmode=False in the layout.
-    return None
+    fig = px.line(x=None, y=None)
+    fig.add_annotation(
+        text="No data to display. Select a cell in the heatmap for more information.",
+        showarrow=False,
+    )
+    fig.update_layout(dragmode=False, plot_bgcolor='white', paper_bgcolor='white')
+    fig.update_xaxes(visible=False)
+    fig.update_yaxes(visible=False)
+    add_rectangle_shape(fig)
+    return fig
 
 
 def add_rectangle_shape(fig):
@@ -32,7 +37,17 @@ def add_rectangle_shape(fig):
         0.25% to 0.75% the height of the figure.
     '''
     # TODO : Draw the rectangle
-    return None
+    fig.add_shape(
+        type="rect",
+        x0=0,
+        x1=1,
+        y0=0.25,
+        y1=0.75,
+        xref="paper",
+        yref="paper",
+        fillcolor=THEME['pale_color'],
+        line_width=0
+    )
 
 
 def get_figure(line_data, arrond, year):
@@ -56,5 +71,11 @@ def get_figure(line_data, arrond, year):
         Returns:
             The figure to be displayed
     '''
-    # TODO : Construct the required figure. Don't forget to include the hover template
-    return None
+    title = f'Trees planted in {arrond} in {year}'
+    fig = px.line(line_data, x="Date_Plantation", y="Counts", title=title)
+    fig.update_yaxes(title='Trees')
+    fig.update_xaxes(tickformat='%d %b')
+    fig.update_traces(hovertemplate=hover_template.get_linechart_hover_template())
+    if len(line_data) == 1:
+        fig.update_traces(mode='markers')
+    return fig
