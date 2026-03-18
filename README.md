@@ -6,8 +6,8 @@ Ce dépôt regroupe deux travaux pratiques du cours **INF8808 – Visualisation 
 Les deux projets reposent sur la création de visualisations interactives, le prétraitement de données et l’utilisation d’un thème graphique personnalisé.
 
 ## Contenu du dépôt
-- **TP2** : visualisation du nombre de lignes prononcées par les personnages de *Roméo et Juliette*
-- **TP3** : visualisation des plantations d’arbres à Montréal entre **2010 et 2020**
+- **TP1** : visualisation du nombre de lignes prononcées par les personnages de *Roméo et Juliette*
+- **TP2** : visualisation des plantations d’arbres à Montréal entre **2010 et 2020**
 
 ## Technologies utilisées
 - Python
