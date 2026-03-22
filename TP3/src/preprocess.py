@@ -2,8 +2,10 @@
     Contains some functions to preprocess the data used in the visualisation.
 '''
 
+import math
 
-def round_decimals(my_df):
+import pandas as pd
+def round_decimals(my_df:pd.DataFrame):
     '''
         Rounds all the numbers in the dataframe to two decimal points
 
@@ -12,11 +14,10 @@ def round_decimals(my_df):
         returns:
             The dataframe with rounded numbers
     '''
-    # TODO : Round the dataframe
-    return None
+    return my_df.round(2)
 
 
-def get_range(col, df1, df2):
+def get_range(col, df1: pd.DataFrame, df2: pd.DataFrame):
     '''
         An array containing the minimum and maximum values for the given
         column in the two dataframes.
@@ -28,11 +29,14 @@ def get_range(col, df1, df2):
         returns:
             The minimum and maximum values across the two dataframes
     '''
-    # TODO : Get the range from the dataframes
-    return []
+    min1 = df1[col].min()
+    min2 = df2[col].min()
+    max1 = df1[col].max()
+    max2 = df2[col].max()
+    return [ min(min1,min2),max(max1,max2)]
 
 
-def combine_dfs(df1, df2):
+def combine_dfs(df1:pd.DataFrame, df2:pd.DataFrame):
     '''
         Combines the two dataframes, adding a column 'Year' with the
         value 2000 for the rows from the first dataframe and the value
@@ -47,11 +51,13 @@ def combine_dfs(df1, df2):
             containing the value 2000 or 2015, depending on its
             original dataframe.
     '''
-    # TODO : Combine the two dataframes
-    return None
+    # utilisation de copies pour ne pas modifier les dataframes originaux
+    df1_with_year = df1.assign(Year = 2000)
+    df2_with_year = df2.assign(Year = 2015)
+    return pd.concat([df1_with_year,df2_with_year])
 
 
-def sort_dy_by_yr_continent(my_df):
+def sort_dy_by_yr_continent(my_df:pd.DataFrame):
     '''
         Sorts the dataframe by year and then by continent.
 
@@ -60,5 +66,5 @@ def sort_dy_by_yr_continent(my_df):
         returns:
             The sorted dataframe.
     '''
-    # TODO : Sort the dataframe
-    return None
+    
+    return my_df.sort_values(by=['Year', 'Continent'])
