@@ -27,7 +27,22 @@ def get_plot(my_df, gdp_range, co2_range):
             The generated figure
     '''
     # TODO : Define figure with animation
-    return None
+    fig = px.scatter(
+        my_df,
+        x = 'GDP',
+        y = 'CO2',
+        log_x = True,
+        log_y = True,
+        color='Continent',
+        color_discrete_sequence=px.colors.qualitative.Set1,
+        size='Population',
+        size_max=30,
+        animation_frame='Year',
+        animation_group='Country Name',
+    )
+    fig.update_traces(mode='markers', marker=dict(sizemin=6))
+    # TODO : set axes range an labels
+    return fig
 
 
 def update_animation_hover_template(fig):
