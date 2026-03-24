@@ -16,6 +16,14 @@ def get_bubble_hover_template():
         returns:
             The content of the tooltip
     '''
-    # TODO : Generate tooltip
-
-    return ''
+    return(
+    '<span style="font-family:Roboto Slab"><b>Country :</b></span> '
+    '<span style="font-family:Roboto">%{customdata[0]}</span><br>'
+    '<span style="font-family:Roboto Slab"><b>Population :</b></span> '
+    '<span style="font-family:Roboto">%{customdata[1]}</span><br>'
+    '<span style="font-family:Roboto Slab"><b>GDP :</b></span> '
+    '<span style="font-family:Roboto">%{x} $ (USD)</span><br>'
+    '<span style="font-family:Roboto Slab"><b>CO2 emissions: </b></span> '
+    '<span style="font-family:Roboto">%{y} metric tonnes</span>'
+    '<extra></extra>')
+    

@@ -39,7 +39,7 @@ df = preprocess.combine_dfs(df_2000, df_2015)
 df = preprocess.sort_dy_by_yr_continent(df)
 
 fig = bubble.get_plot(df, gdp_range, co2_range)
-# fig = bubble.update_animation_hover_template(fig)
+fig = bubble.update_animation_hover_template(fig)
 # fig = bubble.update_animation_menu(fig)
 # fig = bubble.update_axes_labels(fig)
 # fig = bubble.update_template(fig)

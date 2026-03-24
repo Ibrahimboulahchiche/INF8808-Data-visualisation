@@ -39,8 +39,10 @@ def get_plot(my_df, gdp_range, co2_range):
         size_max=30,
         animation_frame='Year',
         animation_group='Country Name',
+        custom_data=['Country Name','Population']
     )
     fig.update_traces(mode='markers', marker=dict(sizemin=6))
+
     # TODO : set axes range an labels
     return fig
 
@@ -56,9 +58,9 @@ def update_animation_hover_template(fig):
         Returns:
             The updated figure
     '''
+    fig.update_traces(hovertemplate=hover_template.get_bubble_hover_template())
 
-    # TODO : Set the hover template
-    return None
+    return fig
 
 
 def update_animation_menu(fig):
