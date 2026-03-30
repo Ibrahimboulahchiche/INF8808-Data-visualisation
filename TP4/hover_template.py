@@ -15,7 +15,7 @@ def map_base_hover_template():
     # TODO : Generate the hover template
     return (
         '<span style="font-family:Oswald">'
-        '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%{location}'
+        '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%{location}'
         '</span><extra></extra>'
     )
 
@@ -33,6 +33,6 @@ def map_marker_hover_template(name):
     # TODO : Generate the hover template
     return (
         f'<span style="font-family:Oswald">'
-        f'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{name}'
+        f'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{name}'
         f'</span><extra></extra>'
     )
