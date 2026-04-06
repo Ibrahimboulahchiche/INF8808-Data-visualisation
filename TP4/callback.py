@@ -3,6 +3,7 @@
     a click is detected on the map, depending on the context
 '''
 import dash_html_components as html
+import plotly.express as px
 
 
 def no_clicks(style):
@@ -17,8 +18,7 @@ def no_clicks(style):
             theme: The updated display theme
             style: The updated display style for the panel
     '''
-    # TODO : Handle no clicks on the map
-    return None, None, None, None
+    return None, None, None, {'visibility': 'hidden'}
 
 
 def map_base_clicked(title, mode, theme, style):
@@ -37,8 +37,10 @@ def map_base_clicked(title, mode, theme, style):
             theme: The updated display theme
             style: The updated display style for the panel
     '''
-    # TODO : Handle clicks on the map base
-    return None, None, None, None
+    if style and style.get('visibility') == 'visible':
+        return title, mode, theme, style
+    else:
+        return None, None, None, {'visibility': 'hidden'}
 
 
 def map_marker_clicked(figure, curve, point, title, mode, theme, style): # noqa : E501 pylint: disable=unused-argument too-many-arguments line-too-long
@@ -59,5 +61,25 @@ def map_marker_clicked(figure, curve, point, title, mode, theme, style): # noqa 
             theme: The updated display theme
             style: The updated display style for the panel
     '''
-    # TODO : Handle clicks on the markers
-    return None, None, None, None
+    data = figure['data'][curve]['customdata'][point]
+    nom_projet = data[0]
+    mode_implantation = data[1]
+    objectif_thematique = data[2]
+    
+    colors = px.colors.qualitative.Plotly
+    color = colors[(curve - 1) % len(colors)]
+    
+    title = html.Span(nom_projet, style={'color': color})
+    mode = mode_implantation
+    if objectif_thematique:
+        print(objectif_thematique, flush=True)
+        themes_list = objectif_thematique.split('\n')
+        theme = html.Div([
+            html.Span('Thématique :'),
+            html.Ul([html.Li(t) for t in themes_list])
+        ])
+    else:
+        theme = None
+    style = {'visibility': 'visible', 'border': '1px solid black', 'padding': '10px'}
+    
+    return title, mode, theme, style

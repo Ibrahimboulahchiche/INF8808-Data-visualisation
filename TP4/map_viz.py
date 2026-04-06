@@ -67,6 +67,8 @@ def add_scatter_traces(fig, street_df):
         df_filtered = street_df[street_df['properties.TYPE_SITE_INTERVENTION'] == it_type]    
         lons, lats = zip(*df_filtered['geometry.coordinates'])
 
+        customdata = df_filtered[['properties.NOM_PROJET', 'properties.MODE_IMPLANTATION', 'properties.OBJECTIF_THEMATIQUE']].values.tolist()
+
         fig.add_trace(go.Scattermapbox(
             lon=lons,
             lat=lats,
@@ -76,6 +78,7 @@ def add_scatter_traces(fig, street_df):
                 color=colors[i % len(colors)]
             ),
             name=it_type,
+            customdata=customdata,
             hovertemplate=hover.map_marker_hover_template(it_type)
         ))
     return fig
